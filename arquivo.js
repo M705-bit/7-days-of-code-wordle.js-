@@ -1,28 +1,30 @@
 var count = 0; 
+var palavra = "";
 document.querySelectorAll(".flex-item").forEach((btn) => {
   btn.addEventListener("click", () => {
     btn.style.backgroundColor = "blue";
-    let letra = btn.innerHTML;
-    if (letra !== "Enter"){
-        palavra+=letra;
-        if (count < 5) { 
-          addWord(letra, count);
-          count++;
-        }
-      }
-    //btn.style.backgroundColor = "blue";
-    
-    if (btn.innerHTML == "Enter" && count == 5) {
-      for (let i=0; i < palavra.length; i++){
-        findWord(palavra[i], i);
-      }
-      //resetando palavra e count
-      count = 0; 
-      palavra = "";
+    var letra = btn.textContent.trim();
 
-    }
-    else {
-      alert(`A palavra deve conter 5 letras!`)
+    if (letra === "Enter") {
+      alert("Você clicou em Enter!");
+      if (palavra.length === 5 )
+        { 
+           alert(`A palavra cumpre todos os critérios!`);
+          for (let i=0; i < palavra.length; i++)
+           { findWord(palavra[i], i);};
+             setTimeout(refresh, 3000);
+          }
+          
+      else {
+        alert(`A palavra deve conter 5 letras!`);
+      }
+    } else {
+      alert(`Você clicou na letra: ${letra}`);
+      palavra+=letra;
+      alert(`A palavra está assim atualmente: ${palavra}`);
+      document.getElementById(`${count}`).textContent = letra;
+      document.getElementById(`${count}`).style.backgroundColor = "grey";
+      count++;
     }
   });
 });
@@ -30,9 +32,18 @@ document.querySelectorAll(".flex-item").forEach((btn) => {
 const array = "VERBO";     
 var letras_acertadas = 0;
 
-function addWord(letra, count){
-  document.getElementById(`${count}`).textContent = letra;
-  document.getElementById(`${count}`).style.backgroundColor = "grey";
+function refresh(){
+  
+  for (i=0; i<palavra.length; i++){
+    document.getElementById(`${i}`).textContent = "";
+    document.getElementById(`${i}`).style.backgroundColor = "grey";
+    //palavra[i] = "";
+    //btn.style.backgroundColor = "blue";
+    
+  }
+  palavra = "";
+  document.querySelectorAll(".flex-item").forEach((btn) => {btn.style.backgroundColor = "white";});
+  count = 0;
 }
 
 function findWord(letter, i) {
