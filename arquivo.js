@@ -1,5 +1,6 @@
 var count = 0; 
 var palavra = "";
+banco_de_dados = require('./saida.json')
 document.querySelectorAll(".flex-item").forEach((btn) => {
   btn.addEventListener("click", () => {
     btn.style.backgroundColor = "blue";
@@ -29,9 +30,15 @@ document.querySelectorAll(".flex-item").forEach((btn) => {
   });
 });
 
-const array = "VERBO";     
+  
 var letras_acertadas = 0;
+function getRandomWords(banco_de_dados) {
+  num_palavras = (banco_de_dados.palavras).length;
+  const num = Math.random() * num_palavras;
+  return banco_de_dados.palavras[num].toUpperCase()
+}
 
+const array = getRandomWords(banco_de_dados);   
 function refresh(){
   
   for (i=0; i<palavra.length; i++){
@@ -68,3 +75,6 @@ function findWord(letter, i) {
   }
   
  }
+
+ //preciso de alguma forma pegar as letras para o wordle aleatóriamente 
+  
