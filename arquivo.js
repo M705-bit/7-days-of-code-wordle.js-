@@ -1,6 +1,26 @@
 var count = 0; 
 var palavra = "";
-banco_de_dados = require('./saida.json')
+var letras_acertadas = 0;
+
+async function loadWords() {
+    const resposta = await fetch('./saida.json');
+    const data = await resposta.json();
+    const array = getRandomWords(data);
+    return array;
+ }
+
+function getRandomWords(banco_de_dados) {
+  let num_palavras = (banco_de_dados.palavras).length;
+  let num = Math.floor(Math.random() * num_palavras);
+  return banco_de_dados.palavras[num].toUpperCase();
+}
+
+window.onload = async function() { 
+     alert("O Jogo começou!");
+     array = await loadWords();
+     console.log(array);
+    };
+
 document.querySelectorAll(".flex-item").forEach((btn) => {
   btn.addEventListener("click", () => {
     btn.style.backgroundColor = "blue";
@@ -8,17 +28,23 @@ document.querySelectorAll(".flex-item").forEach((btn) => {
 
     if (letra === "Enter") {
       alert("Você clicou em Enter!");
-      if (palavra.length === 5 )
-        { 
-           alert(`A palavra cumpre todos os critérios!`);
-          for (let i=0; i < palavra.length; i++)
-           { findWord(palavra[i], i);};
-             setTimeout(refresh, 3000);
+
+      let resultado = verificarPalavra(palavra);
+     
+          if (resultado === true)
+          {
+            alert(`A palavra cumpre todos os critérios!`);
+            for (let i=0; i < palavra.length; i++)
+              { findWord(palavra[i], i);};
+              setTimeout(refresh, 3000);
           }
-          
-      else {
-        alert(`A palavra deve conter 5 letras!`);
-      }
+          else
+          { 
+            alert("Essa não é uma palavra válida!"); 
+             setTimeout(refresh, 1000);
+          }
+        
+     
     } else {
       alert(`Você clicou na letra: ${letra}`);
       palavra+=letra;
@@ -30,17 +56,7 @@ document.querySelectorAll(".flex-item").forEach((btn) => {
   });
 });
 
-  
-var letras_acertadas = 0;
-function getRandomWords(banco_de_dados) {
-  num_palavras = (banco_de_dados.palavras).length;
-  const num = Math.random() * num_palavras;
-  return banco_de_dados.palavras[num].toUpperCase()
-}
-
-const array = getRandomWords(banco_de_dados);   
 function refresh(){
-  
   for (i=0; i<palavra.length; i++){
     document.getElementById(`${i}`).textContent = "";
     document.getElementById(`${i}`).style.backgroundColor = "grey";
@@ -50,9 +66,8 @@ function refresh(){
   count = 0;
 }
 
-function findWord(letter, i) {
-  	 
-  if (array.includses(letter) && array[i] === letter){
+function findWord(letter, i ) {
+  if (array.includes(letter) && array[i] === letter){
     letras_acertadas++;
           document.getElementById(`${i}`).textContent = letter;
           document.getElementById(`${i}`).style.backgroundColor = "green";
@@ -70,8 +85,24 @@ function findWord(letter, i) {
     texto = document.getElementById("game_status");
     texto.innerHTML = "Game Over!";
   }
-  
  }
 
- //preciso de alguma forma pegar as letras para o wordle aleatóriamente 
-  
+ //as funções abaixo não estão funcionando e eu ainda n sei o motivo, qualquer coisa que eu digite dá como errado!
+
+async function existe(minhaArray) {
+    const resposta = await fetch('./saida.json');
+    const data = await resposta.json();
+    const palavrasDoJson = data.palavras;
+    const status = minhaArray.every(palavra => palavrasDoJson.includes(palavra));
+    return status;
+ }
+
+async function verificarPalavra(palavra) {
+  const palavra1 = palavra.toLowerCase();
+  console.log(palavra1);
+  if (palavra1.length === 5) {
+    const myArray = palavra1.split("");
+    const resultado = await existe(myArray);
+    return resultado;
+  }
+}

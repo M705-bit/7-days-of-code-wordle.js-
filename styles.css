@@ -5,6 +5,7 @@
   margin: 0;
 }
 body {
+  font-family: 'Helvica';
   display: flex;
   justify-content: center;  /* alinha horizontalmente */
   align-items: center;      /* alinha verticalmente */
@@ -14,14 +15,13 @@ body {
 
 .container
 {
-
   display: grid;
   grid-template-columns: 30px 30px 30px 30px 30px;
-  grid-template-rows: 30px 30px 30px 30px 30px;
+  grid-template-rows: 30px;
   column-gap: 5px;
   row-gap: 5px;
-  background-color: sandybrown;
-  padding: 15px;
+  background-color: white;
+  padding: 30px;
   border: 1px solid black;
   justify-content: center;
   width: 170px;
@@ -47,8 +47,10 @@ body {
 }
 
 .flex-item {
+    font-family: 'Helvetica';
     flex: 5px 1 3; 
     padding: 2.5px;
     border: 1px solid black;
     margin: 2px;
 }
+
