@@ -1,6 +1,6 @@
 var count = 0; 
 var palavra = "";
-
+banco_de_dados = require('./saida.json')
 document.querySelectorAll(".flex-item").forEach((btn) => {
   btn.addEventListener("click", () => {
     btn.style.backgroundColor = "blue";
@@ -13,7 +13,6 @@ document.querySelectorAll(".flex-item").forEach((btn) => {
            alert(`A palavra cumpre todos os critérios!`);
           for (let i=0; i < palavra.length; i++)
            { findWord(palavra[i], i);};
-          // o setTimeout parou de responder 
              setTimeout(refresh, 3000);
           }
           
@@ -39,15 +38,12 @@ function getRandomWords(banco_de_dados) {
   return banco_de_dados.palavras[num].toUpperCase()
 }
 
-//const array = getRandomWords(banco_de_dados);   
+const array = getRandomWords(banco_de_dados);   
 function refresh(){
   
   for (i=0; i<palavra.length; i++){
     document.getElementById(`${i}`).textContent = "";
     document.getElementById(`${i}`).style.backgroundColor = "grey";
-    //palavra[i] = "";
-    //btn.style.backgroundColor = "blue";
-    
   }
   palavra = "";
   document.querySelectorAll(".flex-item").forEach((btn) => {btn.style.backgroundColor = "white";});
@@ -55,8 +51,8 @@ function refresh(){
 }
 
 function findWord(letter, i) {
-  	console.log(array)
-  if (array.includes(letter) && array[i] === letter){
+  	 
+  if (array.includses(letter) && array[i] === letter){
     letras_acertadas++;
           document.getElementById(`${i}`).textContent = letter;
           document.getElementById(`${i}`).style.backgroundColor = "green";
@@ -76,20 +72,6 @@ function findWord(letter, i) {
   }
   
  }
- function loadWords() {
-    fetch('./saida.json')
-      .then(response => response.json())
-      .then(data => {
-        const array = getRandomWords(data);
-        // continue com seu código aqui
-      });
-}
 
-window.onload = async () => {
-  const banco_de_dados = await loadWords()
-  alert(`O Jogo começou!`);
-
-}
- 
-//se a palavra n bate com nenhuma palavra do banco de dados diga:
-//essa palavra n existe! e puxa a função refresh
+ //preciso de alguma forma pegar as letras para o wordle aleatóriamente 
+  
