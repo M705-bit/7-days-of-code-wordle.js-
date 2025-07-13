@@ -1,40 +1,76 @@
-* { 
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin: 0;
-}
-body {
-  font-family: 'Helvica';
-  display: flex;
-  justify-content: center;  /* alinha horizontalmente */
-  align-items: center;      /* alinha verticalmente */
-  height: 70vh;            /* ocupa a tela toda */
-  margin: 0;                /* tira margem automática do body */
+/*o elemento html define o corpo inteiro da página, ele é o elemento pai de qualquwr elemento que venha a ser adicionado, portanto
+para definirmos por exemplo a alturado body em relação a página, precisamos definir a altura do html, pois é ele quem controla o 
+tamanho que a janela ocupa no nevegador*/
+
+html {
+  height: 100%; 
+  background-color: antiquewhite;
 }
 
-.container
-{
-  display: grid;
-  grid-template-columns: 30px 30px 30px 30px 30px;
-  grid-template-rows: 30px;
-  column-gap: 5px;
-  row-gap: 5px;
-  background-color: white;
-  padding: 30px;
-  border: 1px solid black;
+body {
+  height: 100%;
+  background-color: lightyellow;
+  display: flex;
   justify-content: center;
-  width: 170px;
-  height: 170px;
-} 
+  align-items: center;
+  flex-direction: column;
+}
+h1 {
+  order: 1;
+  text-align: center;
+  font-family: "Futura Md BT", "Futura Lt BT", "Futura", sans-serif;
+    
+}
+.container {
+  order: 2;
+  display: flex;
+  background-color: lightcoral;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin: 5%;
+  padding: 1%;
+  height: 30%;
+  
+}
+
+.linha-itens, .linha-coracoes {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 10px;
+}
 
 .item {
   display: flex;
-  flex-basis: 10px;
-  border: 1px solid black; 
-  background-color: lightgrey;
-  color: white;
-  
+  order: 1;
+  background-color: lightblue;
+  padding: 20px;
+  border: 2px solid darkblue;
+  border-radius: 5px;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+}
+
+.flex-container {
+  order: 4;
+  display: flex;
+ 
+
+}
+
+.coracoes {
+  display: flex;
+  order: 2;
+  background-color: lightpink;
+  width: 10px;
+  height: 10px;
+  border-radius: 2.5px;
+  padding: 10px;
+  text-align: center;
+  border: 1px solid darkblue;
 }
 
 .flex-container {
@@ -53,4 +89,3 @@ body {
     border: 1px solid black;
     margin: 2px;
 }
-
