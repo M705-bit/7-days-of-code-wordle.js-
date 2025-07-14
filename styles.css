@@ -5,27 +5,36 @@ tamanho que a janela ocupa no nevegador*/
 html {
   height: 100%; 
   background-color: antiquewhite;
-}
-
-body {
-  height: 100%;
-  background-color: lightyellow;
+  
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
+  
 }
+
+body {
+  margin: 5%; 
+  height: 70%;
+  width: 50%;
+  padding: 3%;
+  background-color: lightsalmon;
+  display: flex;
+  border-radius: 5px;
+  border: 5px solid black;
+  flex-direction: column;
+  font-family: 'Press Start 2P', 'Courier New', monospace;
+}
+
 h1 {
   order: 1;
-  text-align: center;
-  font-family: "Futura Md BT", "Futura Lt BT", "Futura", sans-serif;
-    
+  text-align: left;
 }
 .container {
-  order: 2;
+  order: 1;
   display: flex;
-  background-color: lightcoral;
-  flex-wrap: wrap;
+  /*background-color: lightcoral;*/
+  /*flex-wrap: wrap;*/
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 10px;
@@ -46,19 +55,17 @@ h1 {
   display: flex;
   order: 1;
   background-color: lightblue;
-  padding: 20px;
+  padding: 5px;
   border: 2px solid darkblue;
   border-radius: 5px;
-  width: 20px;
-  height: 20px;
+  width: 40px;
+  height: 40px;
   text-align: center;
 }
 
 .flex-container {
-  order: 4;
+  order: 2;
   display: flex;
- 
-
 }
 
 .coracoes {
@@ -68,9 +75,10 @@ h1 {
   width: 10px;
   height: 10px;
   border-radius: 2.5px;
-  padding: 10px;
+  padding: 5px;
   text-align: center;
   border: 1px solid darkblue;
+
 }
 
 .flex-container {
@@ -79,7 +87,7 @@ h1 {
     justify-content: center;
     padding: 50px;
     width: 25vw;
-    
+    align-items: center;
 }
 
 .flex-item {
@@ -88,4 +96,31 @@ h1 {
     padding: 2.5px;
     border: 1px solid black;
     margin: 2px;
+}
+
+/*
+.super-container {
+  order: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+ 
+}
+ */
+
+.super-container {
+  order: 2;
+  display: flex;
+  flex-direction: column; /* empilha os elementos verticalmente */
+  align-items: center;     /* centraliza horizontalmente */
+  justify-content: center; /* centraliza verticalmente */
+  gap: 20px;               /* espaçamento entre os elementos internos */
+  padding: 30px;
+  margin: auto;
+  max-width: 600px;
+  width: 70%;
+  /*
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.2);
+ */ 
 }
