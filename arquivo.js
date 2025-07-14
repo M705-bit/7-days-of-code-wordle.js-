@@ -1,6 +1,6 @@
 var count = 0; 
 var palavra = "";
-var letras_acertadas = 0;
+//var letras_acertadas = 0;
 
 async function loadWords() {
     const resposta = await fetch('./saida.json');
@@ -22,21 +22,27 @@ window.onload = async function() {
     };
 
 document.querySelectorAll(".flex-item").forEach((btn) => {
-  btn.addEventListener("click", () => {
+  btn.addEventListener("click", async () => {
     btn.style.backgroundColor = "blue";
     var letra = btn.textContent.trim();
 
     if (letra === "Enter") {
       alert("Você clicou em Enter!");
-
-      let resultado = verificarPalavra(palavra);
+      var letras_acertadas = 0;
+      let resultado = await verificarPalavra(palavra);
      
           if (resultado === true)
           {
             alert(`A palavra cumpre todos os critérios!`);
             for (let i=0; i < palavra.length; i++)
-              { findWord(palavra[i], i);};
+              { aqui = findWord(palavra[i], i, letras_acertadas);};
               setTimeout(refresh, 3000);
+              if (aqui == true){
+                print 
+              }
+              else {
+                count++; 
+              }
           }
           else
           { 
@@ -66,7 +72,8 @@ function refresh(){
   count = 0;
 }
 
-function findWord(letter, i ) {
+function findWord(letter, i, letras_acertadas ) {
+  var ganhou = false;
   if (array.includes(letter) && array[i] === letter){
     letras_acertadas++;
           document.getElementById(`${i}`).textContent = letter;
@@ -80,29 +87,30 @@ function findWord(letter, i ) {
     document.getElementById(`${i}`).textContent = letter;
           document.getElementById(`${i}`).style.backgroundColor = "grey";
   }
-         
+  
   if (letras_acertadas===5){
     texto = document.getElementById("game_status");
     texto.innerHTML = "Game Over!";
+    return ganhou = true; 
   }
+  return ganhou; 
  }
 
- //as funções abaixo não estão funcionando e eu ainda n sei o motivo, qualquer coisa que eu digite dá como errado!
 
 async function existe(minhaArray) {
     const resposta = await fetch('./saida.json');
     const data = await resposta.json();
-    const palavrasDoJson = data.palavras;
-    const status = minhaArray.every(palavra => palavrasDoJson.includes(palavra));
-    return status;
+    const myobj = JSON.stringify(data);
+    return myobj.includes(minhaArray);
  }
 
 async function verificarPalavra(palavra) {
   const palavra1 = palavra.toLowerCase();
   console.log(palavra1);
-  if (palavra1.length === 5) {
-    const myArray = palavra1.split("");
-    const resultado = await existe(myArray);
+  if (palavra1.length == 5) {
+    const resultado = await existe(palavra1);
     return resultado;
+    
   }
 }
+
