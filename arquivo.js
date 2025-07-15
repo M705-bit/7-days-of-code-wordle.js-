@@ -1,6 +1,6 @@
 var count = 0; 
 var palavra = "";
-//var letras_acertadas = 0;
+var count1 = 4; 
 
 async function loadWords() {
     const resposta = await fetch('./saida.json');
@@ -35,19 +35,18 @@ document.querySelectorAll(".flex-item").forEach((btn) => {
           {
             alert(`A palavra cumpre todos os critérios!`);
             for (let i=0; i < palavra.length; i++)
-              { aqui = findWord(palavra[i], i, letras_acertadas);};
-              setTimeout(refresh, 3000);
-              if (aqui == true){
-                print 
-              }
-              else {
-                count++; 
+              { rightWord = findWord(palavra[i], i, letras_acertadas);};
+               
+            setTimeout(refresh, 3000);
+              if (rightWord === false){
+                kill_hearts();
               }
           }
           else
           { 
             alert("Essa não é uma palavra válida!"); 
-             setTimeout(refresh, 1000);
+            kill_hearts();
+            setTimeout(refresh, 3000);
           }
         
      
@@ -90,7 +89,7 @@ function findWord(letter, i, letras_acertadas ) {
   
   if (letras_acertadas===5){
     texto = document.getElementById("game_status");
-    texto.innerHTML = "Game Over!";
+    texto.innerHTML = "Você venceu!";
     return ganhou = true; 
   }
   return ganhou; 
@@ -114,3 +113,17 @@ async function verificarPalavra(palavra) {
   }
 }
 
+function kill_hearts(){
+      count1++; 
+  if (count1 < 9 ) {
+      document.getElementById(`${count1}`).textContent = "X";
+      document.getElementById(`${count1}`).style.backgroundColor = "red";
+  }
+  else {
+    document.getElementById(`${count1}`).textContent = "X";
+    document.getElementById(`${count1}`).style.backgroundColor = "red";
+    text = document.getElementById("game_status");
+    text.innerHTML = "Você perdeu!";
+    count1 = 4; 
+  }
+}
