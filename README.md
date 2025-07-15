@@ -42,15 +42,18 @@ Eu usei o renderizador networkd. O arquivo abaixo está no caminho /etc/netplan.
   <li>search: No Netplan, o campo search é usado dentro da seção nameservers para definir domínios de busca DNS. Isso permite que você resolva nomes de host incompletos automaticamente com base nesses domínios.</li>
   <li>dhcp4/dhcp6: Nesses campos nós desabilitamos o DHCP para prevenir a designação automática de endereços IP. </li>
 </ul>
-Após ter criado o arquivo e escrito as configurações você deve tornar o arquivo executável, eu coloquei o código 600, pois este determina que apenas o usuário root tem permissão de leitura e escrita nesse arquivo. 
+Após ter criado o arquivo e escrito as configurações você deve tornar o arquivo executável, eu coloquei o código 600, <br />
+pois este determina que apenas o usuário root tem permissão de leitura e escrita nesse arquivo. 
 <pre><code>$ sudo chmod 600 /etc/netplan/01-netconfig.yaml</code></pre>
 Agora você precisa aplicar as mudanças ao netplan: 
 <pre><code>sudo netplan apply</code><pre>
 <h4>Configurando servidor web:</h4>
-Eu usei o nginx como webserver, caso queira usá-lo você precisa ter certeza de que ele está instalado no seu computador. Para isso execute o seguinte comando:
+<p>Eu usei o nginx como webserver, caso queira usá-lo você precisa ter certeza de que ele está instalado no seu computador.</p>
+<p>Para isso execute o seguinte comando:
 <pre><code>nginx -v</code></pre>
   
-Para configurar um novo site, crie um arquivo de configuração dentro de /etc/nginx/sites-available, com as seguintes diretivas:
+<p>Para configurar um novo site, crie um arquivo de configuração dentro de /etc/nginx/sites-available,</ br>
+com as seguintes diretivas:</p>
   
 <pre><code>server {
         listen 80;
@@ -70,7 +73,7 @@ Para configurar um novo site, crie um arquivo de configuração dentro de /etc/n
   <li>server_name: Aqui coloque o nome do domínio ou IP do servidor. O meu é destroyer, mas você pode checar isso com o comando dnsdomainname, se não houver resposta você precisará definir um nome de domínio para o seu servidor. </li>
   <li>root:  caminho onde os arquivos do site estão localizados., os meus estão no arquivo /var/www/meusite, nesse diretório eu puxei os arquivos do github com git clone e coloquei o endereço de http que o github oferece para cada respositório, dessa forma eu puxeu o respositório inteiro para esse diretório. </li>
   <li>index: Define o arquivo principal que será carregado. </li>
-  <li>ocation / : em location eu defini quem pode acessar esse webserver.</li>
+  <li>location / : em location eu defini quem pode acessar esse webserver.</li>
 </ul>
 O próximo passo é criar um link simbólico de sites-available para sites-enaibled.
 <pre><code>ln -s /etc/nginx/sites-available/meusite /etc/nginx/sites-enabled</code></pre>
